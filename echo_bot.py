@@ -1,20 +1,18 @@
-import telebot
+from aiogram import Bot, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils import executor
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-TOKEN = os.getenv('API_TOKEN')
-# print(TOKEN)
-bot = telebot.TeleBot(TOKEN, parse_mode=None)  # You can set parse_mode by default. HTML or MARKDOWN
 
+bot = Bot(token=os.getenv('API_TOKEN'))
+dp = Dispatcher(bot)
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-	bot.reply_to(message, "Howdy, how are you doing?")
+@dp.message_handler()
+async def echo_send(message: types.Message):
+	# await message.answer(message.text)
+	await message.reply(message.text)
+	# await bot.send_message(message.from_user.id, message.text)
 
-
-@bot.message_handler(func=lambda m: True)
-def echo_all(message):
-	bot.reply_to(message, message.text)
-
-bot.infinity_polling()
+executor.start_polling(dp, skip_updates=True)
