@@ -41,5 +41,5 @@ def register_handlers_client(dp: Dispatcher):
 	dp.register_message_handler(command_start, commands=['start', 'help'])
 	dp.register_message_handler(open_command, commands=['types'])
 	dp.register_message_handler(command_watch_zerg, commands=['zerg'])
-	dp.register_message_handler(command_watch_zerg, commands=['protos'])
-	dp.register_message_handler(command_watch_zerg, commands=['terran'])
+	dp.register_message_handler(command_watch_protos, commands=['protos'])
+	dp.register_message_handler(command_watch_terran, commands=['terran'])
