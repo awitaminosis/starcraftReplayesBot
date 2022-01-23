@@ -8,5 +8,5 @@ async def echo_send(message: types.Message):
     # await bot.send_message(message.from_user.id, message.text)
 
 
-def register_handlers_client(dp: Dispatcher):
+def register_handlers_common(dp: Dispatcher):
     dp.register_message_handler(echo_send)
