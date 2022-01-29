@@ -3,7 +3,8 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types, Dispatcher
 from dotenv import load_dotenv
 import os
-
+from create_bot import bot
+from keyboards import admin_kb
 
 load_dotenv()
 is_adm_powers = False
@@ -30,6 +31,7 @@ async def access_check(message: types.Message, state: FSMContext):
         adm_pass = os.getenv('ADM_PASS')
         if message.text == adm_pass:
             is_adm_powers = True
+    await bot.send_message(message.from_user.id, 'add?', reply_markup=admin_kb.button_case_admin)
     await state.finish()
 
 

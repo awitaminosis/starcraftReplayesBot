@@ -2,8 +2,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters import Text
-
 from handlers.admin_powers import is_adm
+from data_base import sqlite_db
 
 
 class FSMAdmin(StatesGroup):
@@ -30,7 +30,7 @@ async def load_url(message: types.Message, state: FSMContext):
 async def load_who(message: types.Message, state: FSMContext):
     if is_adm():
         async with state.proxy() as data:
-            data['who'] = message.text
+            data['who'] = message.text.lower()
         await message.reply('Tags?')
         await FSMAdmin.next()
 
@@ -38,7 +38,7 @@ async def load_who(message: types.Message, state: FSMContext):
 async def load_tags(message: types.Message, state: FSMContext):
     if is_adm():
         async with state.proxy() as data:
-            data['tags'] = message.text
+            data['tags'] = message.text.lower()
         await message.reply('Who wins?')
         await FSMAdmin.next()
 
@@ -46,10 +46,11 @@ async def load_tags(message: types.Message, state: FSMContext):
 async def load_win(message: types.Message, state: FSMContext):
     if is_adm():
         async with state.proxy() as data:
-            data['win'] = message.text
+            data['win'] = message.text.lower()
         async with state.proxy() as data:
             await message.reply(str(data))
 
+        await sqlite_db.sql_add_command(state)
         await state.finish()
 
 async def cancel_handler(message: types.Message, state: FSMContext):
