@@ -1,4 +1,2 @@
 aiogram
 python-dotenv
-fastapi
-uvicorn[standard]
