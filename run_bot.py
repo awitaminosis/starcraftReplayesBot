@@ -11,7 +11,7 @@ load_dotenv()
 
 async def on_startup(_):
     print("I'm online")
-    await bot.set_webhook(token=os.getenv('URL_APP'))
+    await bot.set_webhook(os.getenv('URL_APP'))
     sqlite_db.sql_start()
 
 
@@ -32,5 +32,5 @@ executor.start_webhook(
     on_shutdown=on_shutdown,
     skip_updates=False,
     host='0.0.0.0',
-    port=int(os.environ.get('PORT',5000))
+    port=int(os.environ.get('PORT', 5000))
 )
