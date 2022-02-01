@@ -18,8 +18,8 @@ async def command_watch_replay(message: types.Message):
 		# await bot.send_message(message.from_user.id, "Sorry, later. I'm still watching zerg's replays myself")
 		await sqlite_db.sql_read(message, message.text)
 		# await message.delete()
-	except:
-		await message.reply('An exceptional situation has occurred - there was an exception')
+	except Exception as e:
+		await message.reply('An exceptional situation has occurred - there was an exception. ' + e)
 
 
 def register_handlers_client(dp: Dispatcher):
