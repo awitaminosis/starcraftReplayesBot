@@ -15,7 +15,7 @@ def sql_start(database_url):
 
 async def sql_add_command(state):
     async with state.proxy() as data:
-        cur.execute('INSERT INTO replays VALUES (?, ?, ?, ?)', tuple(data.values()))
+        cur.execute('INSERT INTO replays VALUES (%s, %s, %s, %s)', tuple(data.values()))
         base.commit()
 
 
