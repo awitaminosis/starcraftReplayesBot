@@ -33,8 +33,10 @@ async def sql_read(message: types.Message, requested_replay_type):
         # db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
 
         # db_data = cur.execute("SELECT * from replays where who='%s'", tuple(requested_replay_type))
-        db_data = cur.execute("SELECT * from replays where who='zvp'").fetchall()
+        db_data = cur.execute("SELECT * from replays where who='zvp'")
+        print(db_data)
         print('4.5')
+        db_data = cur.fetchall()
         print(db_data)
         # db_data = db_data.fetchall()
         print(5)

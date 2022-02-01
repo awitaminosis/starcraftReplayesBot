@@ -19,7 +19,7 @@ async def command_watch_replay(message: types.Message):
 		await sqlite_db.sql_read(message, message.text)
 		# await message.delete()
 	except Exception as e:
-		await message.reply('An exceptional situation has occurred - there was an exception. ' + e)
+		await message.reply('An exceptional situation has occurred - there was an exception. ' + str(e))
 
 
 def register_handlers_client(dp: Dispatcher):
