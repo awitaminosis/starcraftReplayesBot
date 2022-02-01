@@ -10,7 +10,7 @@ def sql_start(database_url):
     cur = base.cursor()
     if base:
         print('db connected OK')
-        base.execute('CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)')
+        cur.execute('CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)')
         base.commit()
 
 async def sql_add_command(state):
