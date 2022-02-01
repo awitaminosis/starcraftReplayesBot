@@ -18,8 +18,8 @@ async def on_startup(dp):
 async def on_shutdown(dp):
     global base, cur
     await bot.delete_webhook()
-    cur.close()
-    base.close()
+    await sqlite_db.shutdown()
+
 
 client.register_handlers_client(dp)
 admin.register_handlers_admin(dp)

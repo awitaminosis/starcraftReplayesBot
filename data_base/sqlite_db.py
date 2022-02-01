@@ -32,7 +32,8 @@ async def sql_read(message: types.Message, requested_replay_type):
         print(requested_replay_type)
         # db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
 
-        db_data = cur.execute("SELECT * from replays where who='%s'", tuple(requested_replay_type))
+        # db_data = cur.execute("SELECT * from replays where who='%s'", tuple(requested_replay_type))
+        db_data = cur.execute("SELECT * from replays where who='zvp'")
         print('4.5')
         print(db_data)
         db_data = db_data.fetchall()
@@ -46,3 +47,7 @@ async def sql_read(message: types.Message, requested_replay_type):
             await no_data(message)
     else:
         await no_data(message)
+
+async def shutdown():
+    cur.close()
+    base.close()
