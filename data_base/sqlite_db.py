@@ -29,12 +29,13 @@ async def sql_read(message: types.Message, requested_replay_type):
     print(3)
     if requested_replay_type in ['zvz', 'zvt', 'zvp', 'tvz', 'tvt', 'tvp', 'pvz', 'pvt', 'pvp']:
         print(4)
-        print(requested_replay_type)
+        print(type(requested_replay_type))
+        print(tuple(requested_replay_type))
         # db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
 
         # db_data = cur.execute("SELECT * from replays where who='%s'", tuple(requested_replay_type))
         # db_data = cur.execute("SELECT * from replays where who='zvp'")
-        db_data = cur.execute("SELECT * from replays where who=%s", tuple(requested_replay_type))
+        db_data = cur.execute("SELECT * from replays where who=%s", (requested_replay_type,))
         print(db_data)
         print('4.5')
         db_data = cur.fetchall()
