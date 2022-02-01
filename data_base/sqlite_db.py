@@ -24,29 +24,12 @@ async def no_data(message: types.Message):
 
 
 async def sql_read(message: types.Message, requested_replay_type):
-    print(2)
     requested_replay_type = requested_replay_type[1:]
-    print(3)
     if requested_replay_type in ['zvz', 'zvt', 'zvp', 'tvz', 'tvt', 'tvp', 'pvz', 'pvt', 'pvp']:
-        print(4)
-        print(type(requested_replay_type))
-        print(tuple(requested_replay_type))
-        print((requested_replay_type,))
-        # db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
-
-        # db_data = cur.execute("SELECT * from replays where who='%s'", tuple(requested_replay_type))
-        # db_data = cur.execute("SELECT * from replays where who='zvp'")
         db_data = cur.execute("SELECT * from replays where who=%s", (requested_replay_type,))
-        print(db_data)
-        print('4.5')
         db_data = cur.fetchall()
-        print(db_data)
-        # db_data = db_data.fetchall()
-        print(5)
         if len(db_data):
-            print(6)
             for ret in db_data:
-                print(7)
                 await bot.send_message(message.from_user.id, 'url: ' + ret[0])
         else:
             await no_data(message)
