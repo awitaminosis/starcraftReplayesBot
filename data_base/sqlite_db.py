@@ -1,10 +1,12 @@
 import sqlite3 as sq
 from create_bot import bot
 from aiogram import types
+import psycopg2 as ps
 
-def sql_start():
+def sql_start(database_url):
     global base, cur
-    base = sq.connect('sc.db')
+    # base = sq.connect('sc.db')
+    base = ps.connect(database_url, sslmode='require')
     cur = base.cursor()
     if base:
         print('db connected OK')

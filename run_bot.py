@@ -12,11 +12,14 @@ load_dotenv()
 async def on_startup(dp):
     print("I'm online")
     await bot.set_webhook(os.getenv('URL_APP'))
-    sqlite_db.sql_start()
+    sqlite_db.sql_start(os.environ.get('DATABASE_URL'))
 
 
 async def on_shutdown(dp):
+    global base, cur
     await bot.delete_webhook()
+    cur.close()
+    base.close()
 
 client.register_handlers_client(dp)
 admin.register_handlers_admin(dp)
