@@ -29,7 +29,9 @@ async def sql_read(message: types.Message, requested_replay_type):
     print(3)
     if requested_replay_type in ['zvz', 'zvt', 'zvp', 'tvz', 'tvt', 'tvp', 'pvz', 'pvt', 'pvp']:
         print(4)
-        db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
+        print(requested_replay_type)
+        # db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
+        db_data = cur.execute("SELECT * from replays where who=%s", tuple(requested_replay_type)).fetchall()
         print(5)
         if len(db_data):
             print(6)
