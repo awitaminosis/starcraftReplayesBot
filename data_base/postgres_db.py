@@ -55,8 +55,7 @@ async def sql_read(message: types.Message, requested_replay_type):
         else:
             await no_data(message)
 
-        # stats
-        print(0)
+        # save stats
         await learn_popular(requested_replay_type, message.from_user.id)
 
     else:
@@ -64,10 +63,7 @@ async def sql_read(message: types.Message, requested_replay_type):
 
 
 async def learn_popular(who, user_id):
-    print(1)
-    print((who, user_id))
     cur.execute("INSERT INTO stats (who, userid) VALUES (%s, %s)", (who, user_id))
-    print(2)
     base.commit()
 
 
