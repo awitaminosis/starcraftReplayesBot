@@ -66,7 +66,7 @@ async def sql_read(message: types.Message, requested_replay_type):
 async def learn_popular(who, user_id):
     print(1)
     print((who, user_id))
-    cur.execute("INSERT INTO stats VALUES (%s, %s)", (who, user_id))
+    cur.execute("INSERT INTO stats (who, userid) VALUES (%s, %s)", (who, user_id))
     print(2)
     base.commit()
 
