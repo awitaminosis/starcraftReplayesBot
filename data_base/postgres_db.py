@@ -14,6 +14,9 @@ def sql_start(database_url):
         cur.execute(
             "CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)"
         )
+        cur.execute(
+            "CREATE TABLE if NOT EXISTS stats(id Integer Primary Key Generated Always as Identity, who TEXT, userid INT)"
+        )
         base.commit()
 
 
