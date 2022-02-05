@@ -12,6 +12,9 @@ def sql_start(database_url):
         base.execute(
             "CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)"
         )
+        base.execute(
+            "CREATE TABLE if NOT EXISTS stats(id Integer Primary Key Generated Always as Identity, who TEXT PRIMARY KEY, userid INT)"
+        )
         base.commit()
 
 
