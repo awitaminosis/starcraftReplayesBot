@@ -54,6 +54,10 @@ async def sql_read(message: types.Message, requested_replay_type):
                 await bot.send_message(message.from_user.id, "url: " + ret[0])
         else:
             await no_data(message)
+
+        # stats
+        cur.execute("INSERT INTO stats VALUES (%s, %s)", tuple(requested_replay_type, message.from_user.id))
+        base.commit()
     else:
         await no_data(message)
 
