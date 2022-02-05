@@ -56,10 +56,19 @@ async def sql_read(message: types.Message, requested_replay_type):
             await no_data(message)
 
         # stats
-        cur.execute("INSERT INTO stats VALUES (%s, %s)", tuple(requested_replay_type, message.from_user.id))
-        base.commit()
+        print(0)
+        await learn_popular(requested_replay_type, message.from_user.id)
+
     else:
         await no_data(message)
+
+
+async def learn_popular(who, user_id):
+    print(1)
+    print(tuple(who, user_id))
+    cur.execute("INSERT INTO stats VALUES (%s, %s)", tuple(who, user_id))
+    print(2)
+    base.commit()
 
 
 async def shutdown():
