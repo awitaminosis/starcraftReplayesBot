@@ -1,7 +1,7 @@
 from aiogram import types, Dispatcher
 from create_bot import dp, bot
 from keyboards import kb_client
-from data_base import sqlite_db
+from data_base import postgres_db
 
 
 async def command_start(message: types.Message):
@@ -21,7 +21,7 @@ async def command_start(message: types.Message):
 async def command_watch_replay(message: types.Message):
     try:
         # await bot.send_message(message.from_user.id, "Sorry, later. I'm still watching zerg's replays myself")
-        await sqlite_db.sql_read(message, message.text)
+        await postgres_db.sql_read(message, message.text)
         # await message.delete()
     except Exception as e:
         print(str(e))

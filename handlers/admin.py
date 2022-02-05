@@ -3,7 +3,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters import Text
 from handlers.admin_powers import is_adm
-from data_base import sqlite_db
+from data_base import postgres_db
 
 
 class FSMAdmin(StatesGroup):
@@ -54,7 +54,7 @@ async def load_win(message: types.Message, state: FSMContext):
         async with state.proxy() as data:
             await message.reply(str(data))
 
-        await sqlite_db.sql_add_command(state)
+        await postgres_db.sql_add_command(state)
         await state.finish()
 
 

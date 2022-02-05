@@ -1,15 +1,19 @@
 import sqlite3 as sq
 from create_bot import bot
 from aiogram import types
+import psycopg2 as ps
 
 
 def sql_start(database_url):
     global base, cur
-    base = sq.connect('sc.db')
+    # base = sq.connect('sc.db')
+    base = ps.connect(database_url, sslmode="require")
     cur = base.cursor()
     if base:
         print("db connected OK")
-        base.execute('CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)')
+        cur.execute(
+            "CREATE TABLE if NOT EXISTS replays(url TEXT PRIMARY KEY, who TEXT, tags TEXT, win TEXT)"
+        )
         base.commit()
 
 
@@ -38,7 +42,10 @@ async def sql_read(message: types.Message, requested_replay_type):
         "pvt",
         "pvp",
     ]:
-        db_data = cur.execute("SELECT * from replays where who='" + requested_replay_type + "'").fetchall()
+        db_data = cur.execute(
+            "SELECT * from replays where who=%s", (requested_replay_type,)
+        )
+        db_data = cur.fetchall()
         if len(db_data):
             for ret in db_data:
                 await bot.send_message(message.from_user.id, "url: " + ret[0])
