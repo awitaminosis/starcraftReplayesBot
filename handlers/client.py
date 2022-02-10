@@ -20,9 +20,8 @@ async def command_start(message: types.Message):
 
 async def command_watch_replay(message: types.Message):
     try:
-        # await bot.send_message(message.from_user.id, "Sorry, later. I'm still watching zerg's replays myself")
+        # await bot.send_message(message.from_user.id, "Sorry, later. I'm still watching replays myself")
         await postgres_db.sql_read(message, message.text)
-        # await message.delete()
     except Exception as e:
         print(str(e))
         await message.reply(
@@ -32,7 +31,6 @@ async def command_watch_replay(message: types.Message):
 
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=["start", "help"])
-    # dp.register_message_handler(open_command, commands=['types'])
     dp.register_message_handler(
         command_watch_replay,
         commands=["zvz", "zvt", "zvp", "tvz", "tvt", "tvp", "pvz", "pvt", "pvp"],
