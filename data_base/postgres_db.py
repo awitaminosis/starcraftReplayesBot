@@ -45,7 +45,7 @@ async def sql_read(message: types.Message, requested_replay_type):
         "pvp",
     ]:
         db_data = cur.execute(
-            "SELECT * from replays where who=%s", (requested_replay_type,)
+            "SELECT * from replays where who=%s ORDER BY RAND() LIMIT 1", (requested_replay_type,)
         )
         db_data = cur.fetchall()
         if len(db_data):
