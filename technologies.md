@@ -5,7 +5,7 @@
   - webhooks
   - FSM
 
-### bd
+### db
 - ~~sqlite3~~
 - psycopg2
 
@@ -13,7 +13,7 @@
 - black
   - github workflow
 
-### hosting
+### hosting, CI/CD
 - heroku
 - automatic deploy via github push
 - heroku postgres
