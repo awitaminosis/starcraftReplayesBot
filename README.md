@@ -1,4 +1,6 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![GitHub all releases](https://img.shields.io/github/downloads/awitaminosis/starcraftReplayesBot/total)
+
 
 # starcraftReplayesBot
 Telegram bot for replays suggestion
